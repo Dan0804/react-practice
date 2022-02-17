@@ -1,55 +1,58 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 
-function App() {
-
-  let [글제목, 글제목변경] = useState(['남자 코트 추천', '여자 코트 추천', '유아 코트 추천']);
-  let [good, good_count] = useState(0)
-
-  function 제목변경 () {
-    var newArray = [...글제목];
-    newArray[0] = '여자 코트 추천'
-    글제목변경(newArray);
+class Listup extends Component {
+  render() {
+    return (
+      <nav>
+        <ul>
+          <li><a href='1.html'>HTML</a></li>
+          <li><a href='2.html'>CSS</a></li>
+          <li><a href='3.html'>Javascript</a></li>
+        </ul>
+      </nav>
+    );
   }
-
-  return (
-    <div className="App">
-      <div className='black-nav'>
-        <div>개발 blog</div>
-      </div>
-      <button onClick={ 제목변경 }>전환 버튼</button>
-        
-      <div className='list'>
-        <h3> {글제목[0]} <span onClick={ () => {good_count(good + 1)} }>👍</span> {good} </h3>
-        <p>2월 17일 발행</p>
-        <hr/>
-      </div>
-      <div className='list'>
-        <h3> {글제목[1]} </h3>
-        <p>2월 17일 발행</p>
-        <hr/>  
-      </div>
-      <div className='list'>
-        <h3> {글제목[2]} </h3>
-        <p>2월 17일 발행</p>
-        <hr/>  
-      </div>
-
-      <Model/>
-
-    </div>
-  );
 }
 
-function Model() {
-  return (
-    <div className='model'>
-      <h2>제목</h2>
-      <p>날짜</p>
-      <p>상세 내용</p>
-    </div>
-  )
+class Content extends Component {
+  render() {
+    return (
+      <article>
+        <h2> {this.props.title} </h2>
+        {this.props.desc}
+      </article>
+    );
+  }
+}
+
+class Subject extends Component {
+  render() {
+    return (
+      <header>
+        <h1> {this.props.title} </h1>
+        {this.props.sub}
+      </header>
+    );
+  }
+}
+
+class App extends Component {
+  render() {
+    return (
+      <div className='App'>
+        <div>
+          <Subject title="WEB" sub="world wide web"></Subject>
+        </div>
+        <div>
+          <Listup></Listup>
+        </div>
+        <div>
+          <Content title="HTML" desc="HTML is HyperText Markup Language."></Content>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
